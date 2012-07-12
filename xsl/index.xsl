@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-<xsl:output method="html" indent="yes"/>
+<xsl:output 
+    method="html"
+    version="5"
+    encoding="utf-8"
+    cdata-section-elements=""
+    doctype-public="XSLT-compat"
+    doctype-system=""
+    omit-xml-declaration="yes"
+    media-type="text/html"
+    indent="yes"/>
 
 <xsl:include href="grid.xsl"/>
 <xsl:include href="forms.xsl"/>
@@ -11,8 +20,6 @@
 </xsl:template>
 
 <xsl:template match="doc">
-<xsl:text disable-output-escaping="yes"><![CDATA[<!DOCTYPE html>
-]]></xsl:text>
 <html>
  <head>
 	<meta charset="utf-8"/>
