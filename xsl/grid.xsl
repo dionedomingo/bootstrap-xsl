@@ -40,9 +40,43 @@
 	Segments
 -->
 
-<xsl:template match="hero"></xsl:template>
-<xsl:template match="ph"></xsl:template>
-<xsl:template match="tumb"></xsl:template>
+<xsl:template match="hero">
+	<div class="hero-unit"><xsl:apply-templates select="*"/></div>
+</xsl:template>
+
+<xsl:template match="ph">
+	<div class="page-header">
+		<h1>
+			<xsl:value-of select="."/>
+			<xsl:if test="string-length(@cm) > 0"><small><xsl:value-of select="@cm"/></small></xsl:if>
+		</h1>
+	</div>
+</xsl:template>
+
+<xsl:template match="tumb">
+	<ul class="thumbnails">
+  		<xsl:for-each select="item">
+  			<li class="{@s}">
+  				<xsl:choose>
+  					<xsl:when test="@t = 'more'">
+  						 <div class="thumbnail">
+      						<a href="{@b}">
+      							<img src="{@i}" alt="{@title}"/>
+      						</a>
+      						<h5><xsl:value-of select="@title"/></h5>
+      						<p><xsl:copy-of select="."/></p>
+    					</div>
+  					</xsl:when>
+  					<xsl:otherwise>
+	    				<a href="{@b}" class="thumbnail">
+    	  					<img src="{@i}" alt="{@title}"/>
+    					</a>
+  					</xsl:otherwise>
+  				</xsl:choose>
+  			</li>
+  		</xsl:for-each>
+	</ul>
+</xsl:template>
 
 <!-- 
 	Elements
@@ -69,8 +103,14 @@
 	</blockquote>
 </xsl:template>
 
-<xsl:template match="list"></xsl:template>
-<xsl:template match="code"></xsl:template>
+<xsl:template match="a"><a href="{@h}" class="{@c}" click="{@on}"><xsl:value-of select="."/></a></xsl:template>
+<xsl:template match="aa"><a href="#" class="{@c}" click="{@on}"><xsl:value-of select="."/></a></xsl:template>
+
+<xsl:template match="list">
+
+</xsl:template>
+<xsl:template match="code">
+</xsl:template>
 
 <xsl:template match="ico"><i class="icon-{@p}"></i></xsl:template>
 <xsl:template match="wico"><i class="icon-{@p} icon-white"></i></xsl:template>

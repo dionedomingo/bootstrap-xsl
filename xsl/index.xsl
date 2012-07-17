@@ -4,7 +4,7 @@
     method="html"
     version="5"
     encoding="utf-8"
-    cdata-section-elements=""
+    cdata-section-elements="p"
     doctype-public="XSLT-compat"
     doctype-system=""
     omit-xml-declaration="yes"
