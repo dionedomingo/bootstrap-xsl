@@ -10,7 +10,7 @@
 </xsl:template>
 
 <xsl:template match="fcont">
-	<div class="container-fluid"><xsl:apply-templates select="frow|span"/></div>
+	<div class="container-fluid"><xsl:apply-templates select="frow|row|span"/></div>
 </xsl:template>
 
 <xsl:template match="row">
@@ -40,6 +40,7 @@
 	Segments
 -->
 
+<xsl:template match="t"><xsl:apply-templates select="*"/></xsl:template>
 <xsl:template match="hero">
 	<div class="hero-unit"><xsl:apply-templates select="*"/></div>
 </xsl:template>
@@ -103,13 +104,48 @@
 	</blockquote>
 </xsl:template>
 
-<xsl:template match="a"><a href="{@h}" class="{@c}" click="{@on}"><xsl:value-of select="."/></a></xsl:template>
-<xsl:template match="aa"><a href="#" class="{@c}" click="{@on}"><xsl:value-of select="."/></a></xsl:template>
+<xsl:template match="a"><a href="{@h}" class="{@c}" click="{@on}"><xsl:apply-templates select="*"/></a></xsl:template>
+<xsl:template match="aa"><a href="#" class="{@c}" click="{@on}"><xsl:apply-templates select="*"/></a></xsl:template>
 
 <xsl:template match="list">
-
+	<xsl:choose>
+		<xsl:when test="@t='u'">
+			<ul>
+				<xsl:apply-templates select="it" mode="list"/>
+			</ul>
+		</xsl:when>
+		<xsl:when test="@t='us'">
+			<ul class="unstyled">
+				<xsl:apply-templates select="it" mode="list"/>
+			</ul>
+		</xsl:when>
+		<xsl:when test="@t='o'">
+			<ol>
+				<xsl:apply-templates select="it" mode="list"/>
+			</ol>
+		</xsl:when>
+		<xsl:when test="@t='d'">
+			<dl>
+				<xsl:apply-templates select="it" mode="dlist"/>
+			</dl>
+		</xsl:when>
+		<xsl:when test="@t='dh'">
+			<dl class="dl-horizontal">
+				<xsl:apply-templates select="it" mode="dlist"/>
+			</dl>
+		</xsl:when>
+	</xsl:choose>
 </xsl:template>
-<xsl:template match="code">
+<xsl:template match="it" mode="list">
+	<li class="{@c}"><xsl:apply-templates select="*"/></li>
+</xsl:template>
+<xsl:template match="it" mode="dlist">
+	<dt><xsl:value-of select="@t"/></dt>
+	<dd><xsl:value-of select="."/></dd>
+</xsl:template>
+
+<xsl:template match="cd">
+	<pre class="pre-scrollable"></pre>
 </xsl:template>
 
 <xsl:template match="ico"><i class="icon-{@p}"></i></xsl:template>
